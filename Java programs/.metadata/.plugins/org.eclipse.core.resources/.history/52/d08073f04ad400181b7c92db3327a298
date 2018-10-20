@@ -57,14 +57,12 @@ public class Login extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//Title Movie Database//
 		JLabel lblMovieDatabase = new JLabel("MOVIE DATABASE");
 		lblMovieDatabase.setFont(new Font("Sitka Text", Font.PLAIN, 28));
 		lblMovieDatabase.setForeground(new Color(65, 105, 225));
 		lblMovieDatabase.setBounds(238, 13, 293, 61);
 		contentPane.add(lblMovieDatabase);
 		
-		//Label Search//
 		JLabel lblSearch = new JLabel("Search:");
 		lblSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblSearch.setBounds(37, 93, 86, 36);
@@ -75,7 +73,6 @@ public class Login extends JFrame
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		//Search button//
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\sear.png"));
 		btnNewButton.setBounds(591, 90, 52, 48);

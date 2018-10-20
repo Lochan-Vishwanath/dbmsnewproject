@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Login extends JFrame 
 {
@@ -78,22 +76,7 @@ public class Login extends JFrame
 		btnNewButton.setBounds(591, 90, 52, 48);
 		contentPane.add(btnNewButton);
 		
-		//Panel//
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 13, 683, 516);
-		contentPane.add(panel);
-		panel.setVisible(false);
-		
-		//Venom//
 		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				
-				
-			}
-		});
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\venom.png"));
 		btnNewButton_1.setBounds(37, 226, 176, 270);
 		contentPane.add(btnNewButton_1);
@@ -113,7 +96,5 @@ public class Login extends JFrame
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\first.png"));
 		btnNewButton_3.setBounds(499, 226, 176, 270);
 		contentPane.add(btnNewButton_3);
-		
-		
 	}
 }

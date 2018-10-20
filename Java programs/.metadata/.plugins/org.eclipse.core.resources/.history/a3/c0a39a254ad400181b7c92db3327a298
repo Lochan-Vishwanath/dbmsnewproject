@@ -57,6 +57,12 @@ public class Login extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Panel//
+		JPanel panel = new JPanel();
+		panel.setBounds(12, 13, 683, 516);
+		contentPane.add(panel);
+		panel.setVisible(false);
+		
 		JLabel lblMovieDatabase = new JLabel("MOVIE DATABASE");
 		lblMovieDatabase.setFont(new Font("Sitka Text", Font.PLAIN, 28));
 		lblMovieDatabase.setForeground(new Color(65, 105, 225));
@@ -78,19 +84,13 @@ public class Login extends JFrame
 		btnNewButton.setBounds(591, 90, 52, 48);
 		contentPane.add(btnNewButton);
 		
-		//Panel//
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 13, 683, 516);
-		contentPane.add(panel);
-		panel.setVisible(false);
-		
 		//Venom//
 		JButton btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				panel.setVisible(true);
 				
 			}
 		});

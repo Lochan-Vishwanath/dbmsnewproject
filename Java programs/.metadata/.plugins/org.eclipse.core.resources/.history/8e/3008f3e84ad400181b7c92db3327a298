@@ -50,21 +50,19 @@ public class Login extends JFrame
 		setBackground(Color.GREEN);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 977, 591);
+		setBounds(100, 100, 725, 589);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 99, 71));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//Title Movie Database//
 		JLabel lblMovieDatabase = new JLabel("MOVIE DATABASE");
 		lblMovieDatabase.setFont(new Font("Sitka Text", Font.PLAIN, 28));
 		lblMovieDatabase.setForeground(new Color(65, 105, 225));
 		lblMovieDatabase.setBounds(238, 13, 293, 61);
 		contentPane.add(lblMovieDatabase);
 		
-		//Label Search//
 		JLabel lblSearch = new JLabel("Search:");
 		lblSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblSearch.setBounds(37, 93, 86, 36);
@@ -75,7 +73,6 @@ public class Login extends JFrame
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		//Search button//
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\sear.png"));
 		btnNewButton.setBounds(591, 90, 52, 48);
@@ -101,20 +98,17 @@ public class Login extends JFrame
 		btnNewButton_1.setBounds(37, 226, 176, 270);
 		contentPane.add(btnNewButton_1);
 		
-		//Text Movies Playing Now//
 		JLabel lblMoviesPlayingNow = new JLabel("Movies Playing Now");
 		lblMoviesPlayingNow.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMoviesPlayingNow.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 18));
 		lblMoviesPlayingNow.setBounds(277, 175, 224, 24);
 		contentPane.add(lblMoviesPlayingNow);
 		
-		//Villain//
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\vill.png"));
 		btnNewButton_2.setBounds(277, 226, 176, 270);
 		contentPane.add(btnNewButton_2);
 		
-		//FirstMan//
 		JButton btnNewButton_3 = new JButton("New button");
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\first.png"));
 		btnNewButton_3.setBounds(499, 226, 176, 270);

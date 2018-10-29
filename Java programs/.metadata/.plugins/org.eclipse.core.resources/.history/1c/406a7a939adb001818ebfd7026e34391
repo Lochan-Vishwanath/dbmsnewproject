@@ -1,0 +1,68 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+
+public class Add extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Add frame = new Add();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Add() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 773, 558);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 191, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblAddAMovie = new JLabel("Add a Movie");
+		lblAddAMovie.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAddAMovie.setBounds(318, 25, 129, 40);
+		contentPane.add(lblAddAMovie);
+		
+		JLabel lblMovieTite = new JLabel("Movie Title:");
+		lblMovieTite.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblMovieTite.setBounds(51, 175, 115, 34);
+		contentPane.add(lblMovieTite);
+		
+		JLabel lblLanguage = new JLabel("Language:");
+		lblLanguage.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLanguage.setBounds(51, 222, 103, 32);
+		contentPane.add(lblLanguage);
+		
+		JLabel lblReleaseDate = new JLabel("Release Date:");
+		lblReleaseDate.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblReleaseDate.setBounds(51, 267, 149, 34);
+		contentPane.add(lblReleaseDate);
+		
+		JLabel lblMovieId = new JLabel("Movie ID");
+		lblMovieId.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMovieId.setBounds(51, 133, 115, 29);
+		contentPane.add(lblMovieId);
+	}
+}

@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -19,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class Add extends JFrame 
 {
@@ -28,7 +31,6 @@ public class Add extends JFrame
 	private JTextField title;
 	private JTextField language;
 	private JTextField reldate;
-	private JTextField dirname;
 
 	
 	public static void main(String[] args) 
@@ -57,6 +59,8 @@ public class Add extends JFrame
 	
 	{
 		
+		
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 802, 613);
 		contentPane = new JPanel();
@@ -64,6 +68,25 @@ public class Add extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setBounds(222, 397, 193, 29);
+		contentPane.add(comboBox);
+		
+		try{  
+			Class.forName("com.mysql.jdbc.Driver");  
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
+			String s="select Director_ID,Director_name from director order by Director_ID asc";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(s);
+			while(rs.next())
+	        {
+	            comboBox.addItem(rs.getString(1)+" ---> "+rs.getString(2));
+	        }
+		}
+		catch(Exception e) {
+			
+		}
 		
 		
 		
@@ -127,10 +150,7 @@ public class Add extends JFrame
 		contentPane.add(reldate);
 		reldate.setColumns(10);
 		
-		dirname = new JTextField();
-		dirname.setBounds(212, 397, 103, 24);
-		contentPane.add(dirname);
-		dirname.setColumns(10);
+		
 		
 		
 		
@@ -157,7 +177,7 @@ public class Add extends JFrame
 					
 					String movieyear=reldate.getText();
 					
-					String directorname=dirname.getText();
+					//String directorid=dirid.getText();
 					String lang=language.getText();
 					
 					//Statement stmt = con.createStatement( );
@@ -172,7 +192,7 @@ public class Add extends JFrame
 					
 					pstatement.setString(3,movieyear);
 					
-					pstatement.setInt(5, Integer.parseInt(directorname));
+					//spstatement.setInt(5, Integer.parseInt(directorid));
 					
 					
 					pstatement.executeUpdate();
@@ -180,7 +200,7 @@ public class Add extends JFrame
 					//System.out.println(rs.getString(1)); //+""+rs.getString(2)+"  "+rs.getString(3)//
 					
 					 
-					}catch(Exception e){ System.out.println(e);}
+					}catch(Exception e){ JOptionPane.showMessageDialog(contentPane, "Invalid Director ID");}
 			}
 		});
 		btnSubmit.setBounds(318, 493, 97, 25);
@@ -190,6 +210,8 @@ public class Add extends JFrame
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1.setBounds(340, 343, 172, 24);
 		contentPane.add(lblNewLabel_1);
+		
+		
 		
 		
 		

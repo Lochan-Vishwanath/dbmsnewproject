@@ -116,7 +116,8 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				display dobj=new display("124");
+				dobj.setVisible(true);
 				
 			}
 		});
@@ -133,12 +134,26 @@ public class Login extends JFrame
 		
 		//Villain//
 		JButton btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				display dobj=new display("1");
+				dobj.setVisible(true);
+			}
+		});
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\vill.png"));
 		btnNewButton_2.setBounds(277, 226, 176, 270);
 		contentPane.add(btnNewButton_2);
 		
 		//FirstMan//
 		JButton btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				display dobj=new display("123");
+				dobj.setVisible(true);
+			}
+		});
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\first.png"));
 		btnNewButton_3.setBounds(499, 226, 176, 270);
 		contentPane.add(btnNewButton_3);

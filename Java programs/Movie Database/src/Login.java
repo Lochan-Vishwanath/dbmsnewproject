@@ -77,7 +77,7 @@ public class Login extends JFrame
 		setBackground(Color.GREEN);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 977, 591);
+		setBounds(100, 100, 921, 591);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 250, 154));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,26 +88,27 @@ public class Login extends JFrame
 		
 		//Title Movie Database//
 		JLabel lblMovieDatabase = new JLabel("MOVIE DATABASE");
-		lblMovieDatabase.setFont(new Font("Segoe UI Semilight", Font.BOLD, 28));
-		lblMovieDatabase.setForeground(new Color(65, 105, 225));
-		lblMovieDatabase.setBounds(179, 13, 293, 61);
+		lblMovieDatabase.setFont(new Font("Perpetua Titling MT", Font.BOLD, 34));
+		lblMovieDatabase.setForeground(Color.MAGENTA);
+		lblMovieDatabase.setBounds(311, 13, 361, 61);
 		contentPane.add(lblMovieDatabase);
 		
 		//Label Search//
 		JLabel lblSearch = new JLabel("Search:");
+		lblSearch.setForeground(Color.RED);
 		lblSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblSearch.setBounds(23, 94, 86, 36);
+		lblSearch.setBounds(119, 94, 86, 36);
 		contentPane.add(lblSearch);
 		
 		textField = new JTextField();
-		textField.setBounds(121, 97, 419, 36);
+		textField.setBounds(217, 97, 419, 36);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		//Search button//
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\sear.png"));
-		btnNewButton.setBounds(571, 97, 39, 36);
+		btnNewButton.setBounds(648, 97, 39, 36);
 		contentPane.add(btnNewButton);
 		
 		//Venom//
@@ -122,14 +123,15 @@ public class Login extends JFrame
 			}
 		});
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\venom.png"));
-		btnNewButton_1.setBounds(37, 226, 176, 270);
+		btnNewButton_1.setBounds(121, 175, 176, 270);
 		contentPane.add(btnNewButton_1);
 		
 		//Text Movies Playing Now//
 		JLabel lblMoviesPlayingNow = new JLabel("Movies Playing Now");
+		lblMoviesPlayingNow.setForeground(Color.PINK);
 		lblMoviesPlayingNow.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMoviesPlayingNow.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 18));
-		lblMoviesPlayingNow.setBounds(277, 175, 224, 24);
+		lblMoviesPlayingNow.setBounds(352, 146, 224, 24);
 		contentPane.add(lblMoviesPlayingNow);
 		
 		//Villain//
@@ -142,7 +144,7 @@ public class Login extends JFrame
 			}
 		});
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\vill.png"));
-		btnNewButton_2.setBounds(277, 226, 176, 270);
+		btnNewButton_2.setBounds(375, 175, 176, 270);
 		contentPane.add(btnNewButton_2);
 		
 		//FirstMan//
@@ -154,8 +156,8 @@ public class Login extends JFrame
 				dobj.setVisible(true);
 			}
 		});
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\first.png"));
-		btnNewButton_3.setBounds(499, 226, 176, 270);
+		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ff.jpg"));
+		btnNewButton_3.setBounds(625, 175, 168, 270);
 		contentPane.add(btnNewButton_3);
 		
 		
@@ -171,8 +173,13 @@ public class Login extends JFrame
 				
 			}
 		});
-		btnAddAMovie.setBounds(654, 103, 122, 24);
+		btnAddAMovie.setBounds(754, 102, 116, 27);
 		contentPane.add(btnAddAMovie);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ba1.jpg"));
+		lblNewLabel.setBounds(0, 0, 903, 544);
+		contentPane.add(lblNewLabel);
 		
 		
 	}

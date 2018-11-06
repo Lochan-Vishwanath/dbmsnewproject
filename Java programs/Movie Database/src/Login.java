@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,7 @@ public class Login extends JFrame
 {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField search;
 
 	/**
 	 * Launch the application.
@@ -100,13 +101,38 @@ public class Login extends JFrame
 		lblSearch.setBounds(119, 94, 86, 36);
 		contentPane.add(lblSearch);
 		
-		textField = new JTextField();
-		textField.setBounds(217, 97, 419, 36);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		search = new JTextField();
+		search.setBounds(217, 97, 419, 36);
+		contentPane.add(search);
+		search.setColumns(10);
 		
 		//Search button//
 		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+				Class.forName("com.mysql.jdbc.Driver");  
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");  
+				System.out.println("Connection established");
+				
+				//here movie is database name, root is username and password  //
+				
+				//Statement Execution//
+				String a="SELECT * FROM movies WHERE Movie_title like ?";
+				PreparedStatement p;
+				p=con.prepareStatement(a);
+				String abc=search.getText();
+				p.setString(1, "%"+abc+"%");
+				ResultSet rs=p.executeQuery();
+				while(rs.next()) {
+					System.out.println(rs.getString(1));
+				}
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\sear.png"));
 		btnNewButton.setBounds(648, 97, 39, 36);
 		contentPane.add(btnNewButton);

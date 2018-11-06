@@ -39,6 +39,7 @@ import javax.swing.ImageIcon;
 public class Add extends JFrame 
 {
 
+
 	private JPanel contentPane;
 	private JTextField id;
 	private JTextField title;
@@ -46,7 +47,7 @@ public class Add extends JFrame
 	private JTextField reldate;
 	private JTextField genre_txt;
 	private JTextField runtime_txt;
-	
+	String s;
 
 	
 	public static void main(String[] args) 
@@ -101,14 +102,14 @@ public class Add extends JFrame
 			while(rs.next())
 	        {
 				//DISPlaY DIRECTOR ID WITH NAME//
-	            comboBox.addItem(rs.getString(1)+" ---> "+rs.getString(2));
+	            comboBox.addItem(rs.getString(1)+"---> "+rs.getString(2));
 	        }
 		}
 		catch(Exception e) {
 			
 		}
 		
-		String s=null;
+		
 		
 		JLabel lblAddAMovie = new JLabel("Add a Movie");
 		lblAddAMovie.setForeground(Color.ORANGE);
@@ -186,10 +187,10 @@ public class Add extends JFrame
 		label.setBounds(315, 406, 118, 147);
 		contentPane.add(label);
 		
-		
 		//BROWSE IMAGE BUTTON//
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
 		         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -205,7 +206,7 @@ public class Add extends JFrame
 		             Image newImage = img.getScaledInstance(label.getWidth(), label.getHeight(),Image.SCALE_SMOOTH);
 		             ImageIcon image = new ImageIcon(newImage);
 		             label.setIcon(image);
-		             //s = path;
+		             s = path;
 		              }
 		         else if(result == JFileChooser.CANCEL_OPTION){
 		             System.out.println("No Data");
@@ -215,25 +216,8 @@ public class Add extends JFrame
 		btnBrowse.setBounds(161, 388, 97, 25);
 		contentPane.add(btnBrowse);
 		
-		
-		
-		
-		
 		//DISPLAY UPLOADED IMAGE//
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
 		
 		id = new JTextField();
 		id.setBounds(199, 96, 103, 24);
@@ -271,7 +255,15 @@ public class Add extends JFrame
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//Example pgm//
+				char x[]=comboBox.getSelectedItem().toString().toCharArray();
+				String z="";
+				for(char y : x) {
+					if(y=='-')
+						break;
+					z+=y;	
+				}
+				System.out.println(z);
 				try{  
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");  
@@ -280,7 +272,7 @@ public class Add extends JFrame
 					//here movie is database name, root is username and password  //
 					
 					//Statement Execution//
-					String a="INSERT INTO movies values(?,?,?,?,?,?,?)";
+					String a="INSERT INTO movies values(?,?,?,?,?,?,?,?)";
 					
 					String movieid=id.getText();
 					String movietitle=title.getText();
@@ -290,32 +282,30 @@ public class Add extends JFrame
 					Time runtime=new Time(Long.parseLong(runtime_txt.getText()));
 					
 					InputStream is = new FileInputStream(new File(s));
-					
-					
-						
+					System.out.println("inputs created");
 					PreparedStatement pstatement;
 					pstatement=con.prepareStatement(a);
+					System.out.println("Prepared statement done");
 					pstatement.setInt(1, Integer.parseInt(movieid));
 					pstatement.setString(2, movietitle);
 					pstatement.setString(3,movieyear);
 					pstatement.setString(4, lang);
-					pstatement.setInt(5,(int) comboBox.getSelectedItem());
+					pstatement.setInt(5,Integer.parseInt(z));
 					pstatement.setString(6, genre);
 					pstatement.setTime(7, runtime);
 					pstatement.setBlob(8,is);
-					
-					
-					
+					System.out.println("only executing query left");
 					pstatement.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Image uploaded successfully");
-					JOptionPane.showMessageDialog(contentPane, "MOVIE ADDED SUCCESSFULLY");
+						JOptionPane.showMessageDialog(null, "Image uploaded successfully");
+						JOptionPane.showMessageDialog(contentPane, "MOVIE ADDED SUCCESSFULLY");
+					
 					
 					
 					 
 					}
 				catch(Exception e)
 					{
-						
+						System.out.println(e.getMessage());
 						if(id.getText().trim().equals("")) 
 						{
 							JOptionPane.showMessageDialog(contentPane, "Movie ID cant be *EMPTY*");
@@ -365,10 +355,6 @@ public class Add extends JFrame
 		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ba2.jpg"));
 		lblNewLabel_2.setBounds(0, 0, 784, 566);
 		contentPane.add(lblNewLabel_2);
-		
-		
-		
-		
 		
 		//Connection//
 	

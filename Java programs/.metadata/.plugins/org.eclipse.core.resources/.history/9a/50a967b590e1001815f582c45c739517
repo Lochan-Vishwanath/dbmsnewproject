@@ -343,21 +343,8 @@ public class Add extends JFrame
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try{  
-					Class.forName("com.mysql.jdbc.Driver");  
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
-					String s="select Director_ID,Director_name from director order by Director_ID asc";
-					Statement st = con.createStatement();
-					ResultSet rs = st.executeQuery(s);
-					while(rs.next())
-			        {
-						//DISPlaY DIRECTOR ID WITH NAME//
-			            comboBox.addItem(rs.getString(1)+"---> "+rs.getString(2));
-			        }
-				}
-				catch(Exception e) {
-					
-				}
+				validate();
+				repaint();
 			}
 		});
 		btnRefresh.setBounds(645, 37, 97, 25);

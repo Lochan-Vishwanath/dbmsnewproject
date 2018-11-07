@@ -41,7 +41,7 @@ public class display extends JFrame {
 	 * Create the frame.
 	 */
 	public display(String Movie_id) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 841, 604);
 		contentPane = new JPanel();
@@ -56,6 +56,10 @@ public class display extends JFrame {
 		String Language = null;
 		String Cast = null;
 		String Rating = null;
+		String Cast1=null;
+		String Cast2=null;
+		String Role1=null;
+		String Role2=null;
 		
 		JLabel poster_lbl = new JLabel();
 		poster_lbl.setBounds(12, 13, 344, 531);
@@ -126,6 +130,28 @@ public class display extends JFrame {
                 ImageIcon newImage = new ImageIcon(myImg);
                 poster_lbl.setIcon(newImage);
 			}
+			//CAST//
+			String q4="Select a.Actor_name,mc.Role from actor a,movie_cast mc where Movie_id=? && a.Actor_ID=mc.Actor_id";
+			PreparedStatement ps4=con.prepareStatement(q4);
+			ps4.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs4=ps4.executeQuery();
+			rs4.absolute(1);
+			Cast1=rs4.getString(1);
+			Role1=rs4.getString(2);
+			rs4.absolute(2);
+			Cast2=rs4.getString(1);
+			Role2=rs4.getString(2);
+					
+			
+			/*while(rs4.next())
+			{
+				System.out.println(rs.getString(1));
+				Cast1=rs.getString(1);
+				Role1=rs.getString(2);
+				Cast2=rs.getString(1);
+				Role2=rs.getString(2);
+				
+			}*/
 		}
 		catch(Exception e) 
 		{
@@ -150,7 +176,7 @@ public class display extends JFrame {
 		
 		JLabel lblCast = new JLabel("Cast:");
 		lblCast.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCast.setBounds(454, 303, 56, 28);
+		lblCast.setBounds(565, 293, 56, 28);
 		contentPane.add(lblCast);
 		
 		JLabel lblMovieId = new JLabel("Movie ID:");
@@ -164,7 +190,7 @@ public class display extends JFrame {
 		contentPane.add(lblTitle);
 		
 		
-		
+		//DISPLAYING BASIC DETAILS OF THE MOVIE FROM THE DATABASE//
 		JLabel title_lbl = new JLabel(MovieTitle);
 		title_lbl.setFont(new Font("Papyrus", Font.BOLD, 18));
 		title_lbl.setBounds(509, 141, 263, 27);
@@ -191,8 +217,10 @@ public class display extends JFrame {
 		
 		JLabel movieid_lbl = new JLabel(Movie_id);
 		movieid_lbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		movieid_lbl.setBounds(611, 60, 84, 27);
+		movieid_lbl.setBounds(591, 60, 84, 27);
 		contentPane.add(movieid_lbl);
+		
+		//DISPLAYING RATING//
 		
 		JLabel lblRating = new JLabel("Rating:");
 		lblRating.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -208,6 +236,28 @@ public class display extends JFrame {
 		rating_lbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rating_lbl.setBounds(732, 517, 40, 23);
 		contentPane.add(rating_lbl);
+		
+		//DISPLAYING CAST//
+		
+		JLabel lblNewLabel_1 = new JLabel(Cast1);
+		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_1.setBounds(454, 334, 120, 27);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel(Cast2);
+		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_2.setBounds(454, 374, 103, 27);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel(Role1);
+		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_3.setBounds(614, 334, 197, 27);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel(Role2);
+		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_4.setBounds(611, 374, 149, 27);
+		contentPane.add(lblNewLabel_4);
 		
 		
 	}

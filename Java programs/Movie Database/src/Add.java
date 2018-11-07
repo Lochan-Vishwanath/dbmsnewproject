@@ -76,7 +76,7 @@ public class Add extends JFrame
 	public Add() 
 	
 	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
 		
 		
 		
@@ -375,7 +375,7 @@ public class Add extends JFrame
 		
 		//BACKGROUND DROP//
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ba2.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\ba2.jpg"));
 		lblNewLabel_2.setBounds(0, 0, 784, 566);
 		contentPane.add(lblNewLabel_2);
 		

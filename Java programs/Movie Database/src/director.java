@@ -53,7 +53,7 @@ public class director extends JFrame {
 	 */
 	public director() 
 	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 578, 463);
 		contentPane = new JPanel();
@@ -64,7 +64,7 @@ public class director extends JFrame {
 		
 		JLabel lblAddADirector = new JLabel("Add a Director");
 		lblAddADirector.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAddADirector.setBounds(30, 37, 122, 29);
+		lblAddADirector.setBounds(102, 35, 122, 29);
 		contentPane.add(lblAddADirector);
 		
 		JLabel lblNewLabel = new JLabel("DIRECTOR ID:");

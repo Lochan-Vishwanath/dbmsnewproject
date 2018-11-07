@@ -76,7 +76,7 @@ public class Login extends JFrame
 		
 			  
 		setBackground(Color.GREEN);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\objects-17-512.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 921, 591);
 		contentPane = new JPanel();
@@ -118,22 +118,47 @@ public class Login extends JFrame
 				//here movie is database name, root is username and password  //
 				
 				//Statement Execution//
-				String a="SELECT * FROM movies WHERE Movie_title like ?";
+				String a="SELECT Movie_id,Movie_title FROM movies WHERE Movie_title like ?";
 				PreparedStatement p;
 				p=con.prepareStatement(a);
 				String abc=search.getText();
 				p.setString(1, "%"+abc+"%");
 				ResultSet rs=p.executeQuery();
+				rs.absolute(1);
+				System.out.println(rs.getString(1));
+				rs.absolute(2);
+				System.out.println(rs.getString(1));
+				
+				/*
+				
+				String[][] results= {{""}};
+				int i=0;
+				int j=0;
 				while(rs.next()) {
-					System.out.println(rs.getString(1));
+					
+					results[i][j++]=rs.getString(1);
+					results[i++][j--]=rs.getString(2);
 				}
+				for( String[] x : results) {
+					for(String y : x) {
+						System.out.print(y);
+					}
+					System.out.println("");
+				}
+				//System.out.println(results);
+				searched sobj=new searched(results);
+				sobj.setVisible(true);
+				
+				*/
+				
+				
 				}
 				catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\sear.png"));
+		btnNewButton.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\sear.png"));
 		btnNewButton.setBounds(648, 97, 39, 36);
 		contentPane.add(btnNewButton);
 		
@@ -148,7 +173,7 @@ public class Login extends JFrame
 				
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\venom.png"));
+		btnNewButton_1.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\venom.png"));
 		btnNewButton_1.setBounds(121, 175, 176, 270);
 		contentPane.add(btnNewButton_1);
 		
@@ -169,7 +194,7 @@ public class Login extends JFrame
 				dobj.setVisible(true);
 			}
 		});
-		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\vill.png"));
+		btnNewButton_2.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\vill.png"));
 		btnNewButton_2.setBounds(375, 175, 176, 270);
 		contentPane.add(btnNewButton_2);
 		
@@ -182,7 +207,7 @@ public class Login extends JFrame
 				dobj.setVisible(true);
 			}
 		});
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ff.jpg"));
+		btnNewButton_3.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\ff.jpg"));
 		btnNewButton_3.setBounds(625, 175, 168, 270);
 		contentPane.add(btnNewButton_3);
 		
@@ -203,7 +228,7 @@ public class Login extends JFrame
 		contentPane.add(btnAddAMovie);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\ba1.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\ba1.jpg"));
 		lblNewLabel.setBounds(0, 0, 903, 544);
 		contentPane.add(lblNewLabel);
 		

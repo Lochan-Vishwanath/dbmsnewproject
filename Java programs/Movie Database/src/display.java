@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,10 +17,13 @@ import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 
 public class display extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField userrating;
 
 	/**
 	 * Launch the application.
@@ -45,7 +49,7 @@ public class display extends JFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 841, 604);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(233, 150, 122));
+		contentPane.setBackground(new Color(0, 191, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -131,6 +135,7 @@ public class display extends JFrame {
                 poster_lbl.setIcon(newImage);
 			}
 			//CAST//
+			/*
 			String q4="Select a.Actor_name,mc.Role from actor a,movie_cast mc where Movie_id=? && a.Actor_ID=mc.Actor_id";
 			PreparedStatement ps4=con.prepareStatement(q4);
 			ps4.setInt(1, Integer.parseInt(Movie_id));
@@ -141,6 +146,21 @@ public class display extends JFrame {
 			rs4.absolute(2);
 			Cast2=rs4.getString(1);
 			Role2=rs4.getString(2);
+			*/
+			String q4="call retrivecast(?)";
+			CallableStatement cs=con.prepareCall(q4);
+			cs.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs4=cs.executeQuery();
+			rs4.absolute(1);
+			Cast1=rs4.getString(1);
+			Role1=rs4.getString(2);
+			rs4.absolute(2);
+			Cast2=rs4.getString(1);
+			Role2=rs4.getString(2);
+			
+			if(!userrating.getText().equals("")) {
+				
+			}
 					
 			
 			/*while(rs4.next())
@@ -193,7 +213,7 @@ public class display extends JFrame {
 		//DISPLAYING BASIC DETAILS OF THE MOVIE FROM THE DATABASE//
 		JLabel title_lbl = new JLabel(MovieTitle);
 		title_lbl.setFont(new Font("Papyrus", Font.BOLD, 18));
-		title_lbl.setBounds(509, 141, 263, 27);
+		title_lbl.setBounds(509, 141, 314, 27);
 		contentPane.add(title_lbl);
 		
 		JLabel dir_lbl = new JLabel(Director);
@@ -224,29 +244,29 @@ public class display extends JFrame {
 		
 		JLabel lblRating = new JLabel("Rating:");
 		lblRating.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblRating.setBounds(661, 517, 71, 27);
+		lblRating.setBounds(624, 517, 71, 27);
 		contentPane.add(lblRating);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sanjay Bhakta\\Desktop\\movie\\imdbl.png"));
+		lblNewLabel.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\imdbl.png"));
 		lblNewLabel.setBounds(771, 517, 40, 27);
 		contentPane.add(lblNewLabel);
 		
 		JLabel rating_lbl = new JLabel(Rating);
 		rating_lbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rating_lbl.setBounds(732, 517, 40, 23);
+		rating_lbl.setBounds(691, 517, 68, 27);
 		contentPane.add(rating_lbl);
 		
 		//DISPLAYING CAST//
 		
 		JLabel lblNewLabel_1 = new JLabel(Cast1);
 		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(454, 334, 120, 27);
+		lblNewLabel_1.setBounds(387, 334, 212, 27);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel(Cast2);
 		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(454, 374, 103, 27);
+		lblNewLabel_2.setBounds(387, 374, 207, 27);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel(Role1);
@@ -256,8 +276,19 @@ public class display extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel(Role2);
 		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		lblNewLabel_4.setBounds(611, 374, 149, 27);
+		lblNewLabel_4.setBounds(611, 374, 200, 27);
 		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblEnterYourRating = new JLabel("Enter Your Rating");
+		lblEnterYourRating.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterYourRating.setFont(new Font("Tahoma", Font.ITALIC, 18));
+		lblEnterYourRating.setBounds(360, 522, 150, 16);
+		contentPane.add(lblEnterYourRating);
+		
+		userrating = new JTextField();
+		userrating.setBounds(522, 521, 56, 22);
+		contentPane.add(userrating);
+		userrating.setColumns(10);
 		
 		
 	}

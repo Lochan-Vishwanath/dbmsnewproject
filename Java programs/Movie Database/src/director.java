@@ -120,7 +120,7 @@ public class director extends JFrame {
 					pstatement.setInt(3, Integer.parseInt(phone));
 					
 					pstatement.executeUpdate();
-					JOptionPane.showMessageDialog(contentPane, "Successfully Added Data");
+					JOptionPane.showMessageDialog(contentPane, "Successfully Added Data.. Please refresh!");
 				}
 				catch(Exception e)
 				{ 

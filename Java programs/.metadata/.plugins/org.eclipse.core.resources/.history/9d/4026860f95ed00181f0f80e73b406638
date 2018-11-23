@@ -24,8 +24,6 @@ import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class display extends JFrame {
 
@@ -342,31 +340,7 @@ public class display extends JFrame {
 		lblPressEnterTo.setBounds(495, 528, 157, 16);
 		contentPane.add(lblPressEnterTo);
 		
-		//BUTTON WHICH DISPLAYS SHOWTIMES//
 		JButton btnViewShowtimes = new JButton("View Showtimes");
-		btnViewShowtimes.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
-				String q="Select m.mstatus movies m where Movie_id=?";
-				PreparedStatement ps=con.prepareStatement(q);
-				ps.setInt(1, Integer.parseInt(Movie_id));
-				ResultSet rs=ps.executeQuery();
-				if(rs.getString(1).equals('R'))
-				{
-					showtime s=new showtime(Movie_id);
-					s.setVisible(true);
-				}
-				
-					
-				}
-				catch(Exception e) {}
-				
-			}
-		});
 		btnViewShowtimes.setBounds(696, 525, 127, 25);
 		contentPane.add(btnViewShowtimes);
 		

@@ -53,7 +53,8 @@ public class Login extends JFrame
 		
 		
 		//Database Connection//
-		try{  
+		try
+		{  
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");  
 			System.out.println("Connection established");
@@ -65,8 +66,13 @@ public class Login extends JFrame
 			while(rs.next())    
 			System.out.println(rs.getString(1)); //+""+rs.getString(2)+"  "+rs.getString(3)//
 			
-			con.close();  
-			}catch(Exception e){ System.out.println(e);}
+			con.close(); 
+			
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		}
 		
 		
 		
@@ -74,7 +80,7 @@ public class Login extends JFrame
 			  
 		setBackground(Color.GREEN);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 921, 591);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 250, 154));
@@ -85,10 +91,10 @@ public class Login extends JFrame
 		
 		
 		//Title Movie Database//
-		JLabel lblMovieDatabase = new JLabel("MOVIE DATABASE");
+		JLabel lblMovieDatabase = new JLabel("CINEMA PORTAL");
 		lblMovieDatabase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMovieDatabase.setFont(new Font("Times New Roman", Font.BOLD, 34));
-		lblMovieDatabase.setForeground(new Color(123, 104, 238));
+		lblMovieDatabase.setForeground(Color.MAGENTA);
 		lblMovieDatabase.setBounds(267, 23, 361, 61);
 		contentPane.add(lblMovieDatabase);
 		
@@ -143,6 +149,15 @@ public class Login extends JFrame
 		btnNewButton.setBounds(648, 97, 39, 36);
 		contentPane.add(btnNewButton);
 		
+		
+		//Text Movies Playing Now//
+				JLabel lblMoviesPlayingNow = new JLabel("Movies Playing Now");
+				lblMoviesPlayingNow.setForeground(new Color(255, 255, 0));
+				lblMoviesPlayingNow.setHorizontalAlignment(SwingConstants.CENTER);
+				lblMoviesPlayingNow.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 18));
+				lblMoviesPlayingNow.setBounds(352, 146, 224, 24);
+				contentPane.add(lblMoviesPlayingNow);
+		
 		//Venom//
 		JButton btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.addActionListener(new ActionListener() 
@@ -158,13 +173,7 @@ public class Login extends JFrame
 		btnNewButton_1.setBounds(121, 175, 176, 270);
 		contentPane.add(btnNewButton_1);
 		
-		//Text Movies Playing Now//
-		JLabel lblMoviesPlayingNow = new JLabel("Movies Playing Now");
-		lblMoviesPlayingNow.setForeground(new Color(255, 255, 0));
-		lblMoviesPlayingNow.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMoviesPlayingNow.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 18));
-		lblMoviesPlayingNow.setBounds(352, 146, 224, 24);
-		contentPane.add(lblMoviesPlayingNow);
+		
 		
 		//Villain//
 		JButton btnNewButton_2 = new JButton("New button");
@@ -179,39 +188,41 @@ public class Login extends JFrame
 		btnNewButton_2.setBounds(375, 175, 176, 270);
 		contentPane.add(btnNewButton_2);
 		
-		//FirstMan//
+		//KGF//
 		JButton btnNewButton_3 = new JButton("New button");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				display dobj=new display("123");
+				display dobj=new display("9");
 				dobj.setVisible(true);
 			}
 		});
-		btnNewButton_3.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\ff.jpg"));
+		btnNewButton_3.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\6.jpg"));
 		btnNewButton_3.setBounds(625, 175, 168, 270);
 		contentPane.add(btnNewButton_3);
 		
 		
 		
+		
 		//Add a movie Button//
-		JButton btnAddAMovie = new JButton("Add a Movie");
+		JButton btnAddAMovie = new JButton("Login as admin");
+		btnAddAMovie.setForeground(Color.BLUE);
+		btnAddAMovie.setFont(new Font("SansSerif", Font.BOLD, 13));
 		btnAddAMovie.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				Add a=new Add();
-				a.setVisible(true);
+				Log l=new Log();
+				l.setVisible(true);
 				
 			}
 		});
-		btnAddAMovie.setBounds(754, 102, 116, 27);
+		btnAddAMovie.setBounds(754, 23, 137, 27);
 		contentPane.add(btnAddAMovie);
 		
-		JButton btnNewButton_4 = new JButton("Add an Actor/Role");
-		btnNewButton_4.setBounds(754, 62, 116, 25);
-		contentPane.add(btnNewButton_4);
 		
+		
+		//BACKGROUND IMAGE//
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\ba1.jpg"));
 		lblNewLabel.setBounds(0, 0, 903, 544);

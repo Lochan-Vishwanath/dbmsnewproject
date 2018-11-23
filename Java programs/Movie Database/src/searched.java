@@ -90,12 +90,33 @@ public class searched extends JFrame
         }
         
         
+        
+        /*
+        while(rs.next()) 
+        {
+        	
+            results[i++][j]=rs.getString(1);  //GETTING MOVIE ID//
+            
+
+        }
+        
+        i=0; j=1;
+        while(rs.next())
+        {
+        	 results[i++][j]=rs.getString(2);
+        }*/
+        
+        
+        
+        
         /*for( String[] x : results) {
             for(String y : x) {
                 System.out.print(y);
             }
             System.out.println("");
         }*/
+        
+        
 		
 		table = new JTable(results,heading);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -129,8 +150,10 @@ public class searched extends JFrame
 		contentPane.add(lblNewLabel);
 		
 	}
-	public void SetRowHight(JTable table){
+	
+	public void SetRowHight(JTable table)
+	{
 		  int height = table.getRowHeight();
 		  table.setRowHeight(height+10);
-		  }
+	}
 }

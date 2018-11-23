@@ -120,7 +120,7 @@ public class Add extends JFrame
 		
 		JLabel lblMovieId = new JLabel("Movie ID :");
 		lblMovieId.setForeground(new Color(255, 222, 173));
-		lblMovieId.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMovieId.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMovieId.setBounds(38, 92, 115, 29);
 		contentPane.add(lblMovieId);
 		
@@ -147,26 +147,26 @@ public class Add extends JFrame
 		JLabel lblNewLabel = new JLabel("Director ID :");
 		lblNewLabel.setForeground(new Color(255, 222, 173));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(26, 329, 149, 24);
+		lblNewLabel.setBounds(38, 332, 149, 24);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblGenre = new JLabel("Genre:");
-		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblGenre.setBackground(new Color(255, 228, 181));
 		lblGenre.setForeground(new Color(255, 222, 173));
-		lblGenre.setBounds(377, 98, 56, 16);
+		lblGenre.setBounds(353, 98, 80, 16);
 		contentPane.add(lblGenre);
 		
 		JLabel lblNewLabel_3 = new JLabel("RunTime:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_3.setForeground(new Color(255, 222, 173));
-		lblNewLabel_3.setBounds(377, 218, 86, 21);
+		lblNewLabel_3.setBounds(365, 213, 86, 21);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Add Poster:");
 		lblNewLabel_4.setForeground(new Color(255, 222, 173));
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_4.setBounds(26, 390, 123, 16);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_4.setBounds(38, 390, 123, 16);
 		contentPane.add(lblNewLabel_4);
 		
 		//ADDING A DIRECTOR//
@@ -253,12 +253,15 @@ public class Add extends JFrame
 		
 		//Submit button//
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnSubmit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				//Example pgm//
 				char x[]=comboBox.getSelectedItem().toString().toCharArray();
 				String z="";
-				for(char y : x) {
+				for(char y : x)
+				{
 					if(y=='-')
 						break;
 					z+=y;	
@@ -274,6 +277,7 @@ public class Add extends JFrame
 					//Statement Execution//
 					String a="INSERT INTO movies values(?,?,?,?,?,?,?,?)";
 					
+					//GET USER INPUT//
 					String movieid=id.getText();
 					String movietitle=title.getText();
 					String movieyear=reldate.getText();
@@ -362,6 +366,36 @@ public class Add extends JFrame
 		});
 		btnRefresh.setBounds(645, 37, 97, 25);
 		contentPane.add(btnRefresh);
+		
+		//ADD AN ACTOR BUTTON//
+		JButton btnNewButton_1 = new JButton("Add an actor");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				addactor a1=new addactor();
+				a1.setVisible(true);
+			}
+		});
+		btnNewButton_1.setBounds(618, 214, 124, 25);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Add Roles ");
+		btnNewButton_2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				addrole role=new addrole();
+				role.setVisible(true);
+			}
+		});
+		btnNewButton_2.setBounds(618, 258, 97, 25);
+		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_5 = new JLabel("Your poster->");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblNewLabel_5.setForeground(new Color(32, 178, 170));
+		lblNewLabel_5.setBounds(136, 469, 122, 24);
+		contentPane.add(lblNewLabel_5);
 		
 		
 		

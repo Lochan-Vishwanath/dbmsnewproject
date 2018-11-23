@@ -348,22 +348,6 @@ public class display extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
-				String q="Select m.mstatus movies m where Movie_id=?";
-				PreparedStatement ps=con.prepareStatement(q);
-				ps.setInt(1, Integer.parseInt(Movie_id));
-				ResultSet rs=ps.executeQuery();
-				if(rs.getString(1).equals('R'))
-				{
-					showtime s=new showtime(Movie_id);
-					s.setVisible(true);
-				}
-				
-					
-				}
-				catch(Exception e) {}
 				
 			}
 		});

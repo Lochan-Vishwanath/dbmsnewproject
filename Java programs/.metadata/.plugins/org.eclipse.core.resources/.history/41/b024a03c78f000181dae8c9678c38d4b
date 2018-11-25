@@ -1,0 +1,375 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.Image;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class display extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField userrating;
+	String MovieTitle = null;
+	String Director = null;
+	String ReleaseDate = null;
+	String Language = null;
+	String Cast = null;
+	String Rating = null;
+	String UserRating=null;
+	String Cast1=null;
+	String Cast2=null;
+	String Role1=null;
+	String Role2=null;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					display frame = new display("200");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public display(String Movie_id) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("X:\\College Projects\\DBMS-Java Project\\movie\\objects-17-512.png"));
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 841, 604);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 191, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		
+		JLabel poster_lbl = new JLabel();
+		poster_lbl.setBounds(12, 13, 344, 531);
+		contentPane.add(poster_lbl);
+		
+		
+		try
+		{  //Connection//
+			Class.forName("com.mysql.jdbc.Driver");  
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
+			String q="Select m.Movie_title,m.Movie_language,m.Movie_year,d.Director_name from movies m,director d where Movie_id=? AND m.Director_id=d.Director_ID";
+			
+			
+			//Getting movie id to display info about the movie//
+			PreparedStatement ps=con.prepareStatement(q);
+			ps.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) 
+			{
+				//MovieTitle//
+				MovieTitle=rs.getString(1);
+				System.out.println(MovieTitle);
+				
+				Language=rs.getString(2);
+				System.out.println(Language);
+				
+				ReleaseDate=rs.getString(3);
+				System.out.println(ReleaseDate);
+				
+				Director=rs.getString(4);
+				System.out.println(Director);
+				
+				//Rating=rs.getString(5);
+				//System.out.println(Rating);
+				
+				
+			}
+			
+			//RATING//
+			
+			String q2="Select Review_stars,user_ratings from movies m,rating r where m.Movie_id=? && m.Movie_id=r.Movie_id";
+			PreparedStatement ps2=con.prepareStatement(q2);
+			ps2.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs2=ps2.executeQuery();
+			
+			while(rs2.next()) 
+			{
+				Rating=rs2.getString(1)+ "/10";
+				UserRating=rs2.getString(2)+ "/10";
+				System.out.println(Rating);
+			}
+			
+			//POSTER//
+			String q3="Select poster from movies where Movie_id=?";
+			PreparedStatement ps3=con.prepareStatement(q3);
+			ps3.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs3=ps3.executeQuery();
+						
+			while(rs3.next()) 
+			{
+				byte[] img = rs3.getBytes("poster");
+
+
+
+                //Resize The ImageIcon
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                Image myImg = im.getScaledInstance(poster_lbl.getWidth(), poster_lbl.getHeight(),Image.SCALE_SMOOTH);
+                ImageIcon newImage = new ImageIcon(myImg);
+                poster_lbl.setIcon(newImage);
+			}
+			//CAST//
+			/*
+			String q4="Select a.Actor_name,mc.Role from actor a,movie_cast mc where Movie_id=? && a.Actor_ID=mc.Actor_id";
+			PreparedStatement ps4=con.prepareStatement(q4);
+			ps4.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs4=ps4.executeQuery();
+			rs4.absolute(1);
+			Cast1=rs4.getString(1);
+			Role1=rs4.getString(2);
+			rs4.absolute(2);
+			Cast2=rs4.getString(1);
+			Role2=rs4.getString(2);
+			*/
+			String q4="call retrivecast(?)";
+			CallableStatement cs=con.prepareCall(q4);
+			cs.setInt(1, Integer.parseInt(Movie_id));
+			ResultSet rs4=cs.executeQuery();
+			rs4.absolute(1);
+			Cast1=rs4.getString(1);
+			Role1=rs4.getString(2);
+			rs4.absolute(2);
+			Cast2=rs4.getString(1);
+			Role2=rs4.getString(2);
+			
+					
+			
+			/*while(rs4.next())
+			{
+				System.out.println(rs.getString(1));
+				Cast1=rs.getString(1);
+				Role1=rs.getString(2);
+				Cast2=rs.getString(1);
+				Role2=rs.getString(2);
+				
+			}*/
+		}
+		catch(Exception e) 
+		{
+			
+		}
+		
+		//LABEL//
+		JLabel lblMovieReleaseDate = new JLabel("Movie Release Date:");
+		lblMovieReleaseDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMovieReleaseDate.setBounds(454, 223, 167, 27);
+		contentPane.add(lblMovieReleaseDate);
+		
+		JLabel lblMovieLanguage = new JLabel("Language:");
+		lblMovieLanguage.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMovieLanguage.setBounds(454, 263, 90, 27);
+		contentPane.add(lblMovieLanguage);
+		
+		JLabel lblDirector = new JLabel("Director:");
+		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDirector.setBounds(454, 181, 76, 29);
+		contentPane.add(lblDirector);
+		
+		JLabel lblCast = new JLabel("CAST");
+		lblCast.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCast.setBounds(543, 293, 56, 28);
+		contentPane.add(lblCast);
+		
+		JLabel lblMovieId = new JLabel("Movie ID:");
+		lblMovieId.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMovieId.setBounds(509, 61, 90, 27);
+		contentPane.add(lblMovieId);
+		
+		JLabel lblTitle = new JLabel("Title:");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTitle.setBounds(454, 141, 56, 27);
+		contentPane.add(lblTitle);
+		
+		
+		//DISPLAYING BASIC DETAILS OF THE MOVIE FROM THE DATABASE//
+		JLabel title_lbl = new JLabel(MovieTitle);
+		title_lbl.setFont(new Font("Bahnschrift", Font.BOLD | Font.ITALIC, 18));
+		title_lbl.setBounds(509, 141, 314, 27);
+		contentPane.add(title_lbl);
+		
+		JLabel dir_lbl = new JLabel(Director);
+		dir_lbl.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		dir_lbl.setBounds(538, 181, 250, 29);
+		contentPane.add(dir_lbl);
+		
+		JLabel releasedate_lbl = new JLabel(ReleaseDate);
+		releasedate_lbl.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		releasedate_lbl.setBounds(624, 223, 164, 27);
+		contentPane.add(releasedate_lbl);
+		
+		JLabel language_lbl = new JLabel(Language);
+		language_lbl.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 18));
+		language_lbl.setBounds(545, 263, 76, 27);
+		contentPane.add(language_lbl);
+		
+		JLabel cast_lbl = new JLabel(Cast);
+		cast_lbl.setBounds(538, 305, 56, 16);
+		contentPane.add(cast_lbl);
+		
+		JLabel movieid_lbl = new JLabel(Movie_id);
+		movieid_lbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		movieid_lbl.setBounds(591, 60, 84, 27);
+		contentPane.add(movieid_lbl);
+		
+		//DISPLAYING RATING//
+		
+		JLabel lblRating = new JLabel("Rating:");
+		lblRating.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRating.setBounds(509, 422, 71, 27);
+		contentPane.add(lblRating);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\imdbl.png"));
+		lblNewLabel.setBounds(656, 451, 40, 27);
+		contentPane.add(lblNewLabel);
+		
+		JLabel rating_lbl = new JLabel(Rating);
+		rating_lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		rating_lbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rating_lbl.setBounds(576, 451, 68, 27);
+		contentPane.add(rating_lbl);
+		
+		//DISPLAYING CAST//
+		
+		JLabel lblNewLabel_1 = new JLabel(Cast1);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_1.setBounds(387, 334, 212, 27);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel(Cast2);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_2.setBounds(387, 374, 207, 27);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel(Role1);
+		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_3.setBounds(614, 334, 197, 27);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel(Role2);
+		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNewLabel_4.setBounds(611, 374, 200, 27);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblEnterYourRating = new JLabel("Enter Your Rating");
+		lblEnterYourRating.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterYourRating.setFont(new Font("Tahoma", Font.ITALIC, 18));
+		lblEnterYourRating.setBounds(454, 492, 150, 29);
+		contentPane.add(lblEnterYourRating);
+		
+		userrating = new JTextField();
+		userrating.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER) {
+					try
+					{
+						Class.forName("com.mysql.jdbc.Driver");  
+						Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root",""); 
+						String q="INSERT INTO usersrate values(?,?)";
+						String Myrate=userrating.getText();
+						PreparedStatement pstatement;
+						pstatement=con.prepareStatement(q);
+						pstatement.setInt(1,Integer.parseInt(Movie_id));
+						pstatement.setInt(2,Integer.parseInt(Myrate));
+						
+						pstatement.executeUpdate();
+						JOptionPane.showMessageDialog(contentPane, "Your rating has been Submitted, Thank You.");
+						
+					}
+					catch(Exception e1) {
+						
+					}
+				}
+			}
+		});
+		userrating.setBounds(616, 491, 56, 30);
+		contentPane.add(userrating);
+		userrating.setColumns(10);
+		
+		JLabel UserRating_lbl = new JLabel(UserRating);
+		UserRating_lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		UserRating_lbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		UserRating_lbl.setBounds(576, 421, 68, 29);
+		contentPane.add(UserRating_lbl);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("X:\\College Projects\\DBMS-Java Project\\movie\\user.png"));
+		label_1.setBounds(654, 414, 40, 36);
+		contentPane.add(label_1);
+		
+		JLabel lblPressEnterTo = new JLabel("Press Enter to Submit");
+		lblPressEnterTo.setForeground(new Color(255, 255, 0));
+		lblPressEnterTo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPressEnterTo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPressEnterTo.setBounds(495, 528, 157, 16);
+		contentPane.add(lblPressEnterTo);
+		
+		//BUTTON WHICH DISPLAYS SHOWTIMES//
+		JButton btnViewShowtimes = new JButton("View Showtimes");
+		btnViewShowtimes.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
+				String q="Select m.mstatus movies m where Movie_id=?";
+				PreparedStatement ps=con.prepareStatement(q);
+				ps.setInt(1, Integer.parseInt(Movie_id));
+				ResultSet rs=ps.executeQuery();
+				if(rs.getString(1).equals('R'))
+				{
+					showtime s=new showtime(Movie_id);
+					s.setVisible(true);
+				}
+				
+					
+				}
+				catch(Exception e) {}
+				
+			}
+		});
+		btnViewShowtimes.setBounds(696, 525, 127, 25);
+		contentPane.add(btnViewShowtimes);
+		
+		
+	}
+}

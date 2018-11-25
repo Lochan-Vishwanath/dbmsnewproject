@@ -350,25 +350,26 @@ public class display extends JFrame {
 			{
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
-				String q="Select m.mstatus movies m where Movie_id=?";
-				PreparedStatement ps=con.prepareStatement(q);
-				ps.setInt(1, Integer.parseInt(Movie_id));
-				ResultSet rs=ps.executeQuery();
-				if(rs.getString(1).equals('R'))
-				{
-					showtime s=new showtime(Movie_id);
-					s.setVisible(true);
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/movie","root","");
+					String q="Select m.mstatus from movies m where Movie_id=?";
+					PreparedStatement ps=con.prepareStatement(q);
+					ps.setInt(1, Integer.parseInt(Movie_id));
+					ResultSet rs=ps.executeQuery();
+					rs.absolute(1);
+					if(rs.getString(1).contains("R"))
+					{
+						showtime s=new showtime(Movie_id);
+						s.setVisible(true);
+					}	
 				}
-				
-					
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(contentPane, "This movie is not running currently.");
 				}
-				catch(Exception e) {}
-				
 			}
 		});
-		btnViewShowtimes.setBounds(696, 525, 127, 25);
+		btnViewShowtimes.setBounds(668, 525, 143, 25);
 		contentPane.add(btnViewShowtimes);
+		
 		
 		
 	}
